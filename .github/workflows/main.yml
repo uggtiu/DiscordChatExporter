@@ -41,7 +41,7 @@ jobs:
       - name: Verify formatting
         id: verify
         run: >
-          dotnet build
+          dotnet build DiscordChatExporter.sln
           -t:CSharpierFormat
           --configuration Release
           --no-restore
@@ -71,7 +71,7 @@ jobs:
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: >
-          dotnet test
+          dotnet test DiscordChatExporter.sln
           -p:CSharpier_Bypass=true
           --configuration Release
           --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
