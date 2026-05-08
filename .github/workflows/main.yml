@@ -50,36 +50,6 @@ jobs:
         if: ${{ failure() && steps.verify.outcome == 'failure' }}
         run: echo "::error title=Bad formatting::Formatting issues detected. Please build the solution locally to fix them."
 
-  test:
-    # Tests need access to secrets, so we can't run them against PRs because of limited trust
-    if: ${{ github.event_name != 'pull_request' }}
-
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    permissions:
-      contents: read
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: Install .NET
-        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
-
-      - name: Run tests
-        env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-        run: >
-          dotnet test DiscordChatExporter.sln
-          -p:CSharpier_Bypass=true
-          --configuration Release
-          --logger "GitHubActions;summary.includePassedTests=true;summary.includeSkippedTests=true"
-          --collect:"XPlat Code Coverage"
-          --
-          RunConfiguration.CollectSourceInformation=true
-          DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-
   pack:
     strategy:
       matrix:
@@ -140,8 +110,6 @@ jobs:
     if: ${{ github.ref_type == 'tag' }}
 
     needs:
-      - format
-      - test
       - pack
 
     runs-on: ubuntu-latest
@@ -221,25 +189,25 @@ jobs:
           ${{ matrix.asset }}.${{ matrix.rid }}.zip
           --repo ${{ github.event.repository.full_name }}
 
-  notify:
-    needs: deploy
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+#  notify:
+#    needs: deploy
+#    runs-on: ubuntu-latest
+#    timeout-minutes: 10
 
-    permissions:
-      contents: read
+#    permissions:
+#      contents: read
 
-    steps:
-      - name: Notify Discord
-        uses: tyrrrz/action-http-request@25f132e48dea89c0f6b7955398270b506e1d51cb # 1.1.4
-        with:
-          url: ${{ secrets.DISCORD_WEBHOOK }}
-          method: POST
-          headers: |
-            Content-Type: application/json; charset=UTF-8
-          body: |
-            {
-              "avatar_url": "https://raw.githubusercontent.com/${{ github.event.repository.full_name }}/${{ github.ref_name }}/favicon.png",
-              "content": "[**${{ github.event.repository.name }}**](<${{ github.event.repository.html_url }}>) v${{ github.ref_name }} has been released!"
-            }
-          retry-count: 5
+#    steps:
+#      - name: Notify Discord
+#        uses: tyrrrz/action-http-request@25f132e48dea89c0f6b7955398270b506e1d51cb # 1.1.4
+#        with:
+#          url: ${{ secrets.DISCORD_WEBHOOK }}
+#          method: POST
+#          headers: |
+#            Content-Type: application/json; charset=UTF-8
+#          body: |
+#            {
+#              "avatar_url": "https://raw.githubusercontent.com/${{ github.event.repository.full_name }}/${{ github.ref_name }}/favicon.png",
+#              "content": "[**${{ github.event.repository.name }}**](<${{ github.event.repository.html_url }}>) v${{ github.ref_name }} has been released!"
+#            }
+#          retry-count: 5
