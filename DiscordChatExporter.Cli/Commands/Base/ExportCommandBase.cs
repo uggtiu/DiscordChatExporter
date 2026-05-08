@@ -137,13 +137,13 @@ public abstract class ExportCommandBase : DiscordCommandBase
     public bool IsUtcNormalizationEnabled { get; set; } = false;
 
     [CommandOption(
-        "some",
-        EnvironmentVariable = "DiscordChatExporter_CLI_some",
-        Description = "some",
+        "meow",
+        EnvironmentVariable = "mrrrrreooooooooooow",
+        Description = "Mreow",
         // Use a converter to accept '1' as 'true' to reuse the existing environment variable
         Converter = typeof(TruthyBooleanInputConverter)
     )]
-    
+    public bool Mreow { get; set; } = false;
 
     [field: AllowNull, MaybeNull]
     protected ChannelExporter Exporter => field ??= new ChannelExporter(Discord);
@@ -358,11 +358,27 @@ public abstract class ExportCommandBase : DiscordCommandBase
 
     public override async ValueTask ExecuteAsync(IConsole console)
     {
-        // Support Ukraine callout -- disabled :)
-        //if (!IsUkraineSupportMessageDisabled)
+        // Support Ukraine callout
+        if (!Mreow)
         {
-            return;
+            console.Output.WriteLine(
+                "┌────────────────────────────────────────────────────────────────────┐"
+            );
+            console.Output.WriteLine(
+                "│   Mreow <3                              │"
+            );
+            console.Output.WriteLine(
+                "│                                                                    │"
+            );
+            console.Output.WriteLine(
+                "│   type meow for disable it :3              │"
+            );
+            console.Output.WriteLine(
+                "└────────────────────────────────────────────────────────────────────┘"
+            );
+            console.Output.WriteLine("");
         }
 
+        await base.ExecuteAsync(console);
     }
 }

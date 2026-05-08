@@ -14,7 +14,7 @@ namespace DiscordChatExporter.Gui.ViewModels;
 public partial class MainViewModel(
     ViewModelManager viewModelManager,
     DialogManager dialogManager,
-    SnackbarManager snackbarManager,
+    //SnackbarManager snackbarManager,
     SettingsService settingsService,
     //UpdateService updateService,
     LocalizationManager localizationManager
