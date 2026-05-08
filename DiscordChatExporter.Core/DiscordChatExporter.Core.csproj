@@ -12,7 +12,6 @@
     <PackageReference Include="WebMarkupMin.Core" />
     <Reference Include="YoutubeExplode">
       <HintPath>..\libs\YoutubeExplode.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
 </Project>
