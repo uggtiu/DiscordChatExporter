@@ -359,18 +359,9 @@ public abstract class ExportCommandBase : DiscordCommandBase
     public override async ValueTask ExecuteAsync(IConsole console)
     {
         // Support Ukraine callout
-        if (!IsUkraineSupportMessageDisabled)
+        //if (!IsUkraineSupportMessageDisabled)
         {
-            console.Output.WriteLine(
-                "┌────────────────────────────────────────────────────────────────────┐"
-            );
-            console.Output.WriteLine(
-                "│                 Hi my name Daniel aka uggtiu...                    │"
-            );
-            console.Output.WriteLine(
-                "└────────────────────────────────────────────────────────────────────┘"
-            );
-            console.Output.WriteLine("");
+            return;
         }
 
         await base.ExecuteAsync(console);
