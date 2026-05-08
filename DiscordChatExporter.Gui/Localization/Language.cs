@@ -4,8 +4,9 @@ public enum Language
 {
     System,
     English,
-    Ukrainian,
     German,
     French,
+    Russian,
     Spanish,
+    Ukrainian,
 }

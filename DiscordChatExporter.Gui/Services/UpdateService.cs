@@ -5,7 +5,7 @@ using Onova;
 using Onova.Exceptions;
 using Onova.Services;
 
-namespace DiscordChatExporter.Gui.Services;
+// namespace DiscordChatExporter.Gui.Services;
 
 public class UpdateService(SettingsService settingsService) : IDisposable
 {

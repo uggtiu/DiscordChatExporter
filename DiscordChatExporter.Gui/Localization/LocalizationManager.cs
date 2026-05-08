@@ -40,16 +40,18 @@ public partial class LocalizationManager : ObservableObject, IDisposable
             Language.System =>
                 CultureInfo.CurrentUICulture.ThreeLetterISOLanguageName.ToLowerInvariant() switch
                 {
-                    "ukr" => UkrainianLocalization,
                     "deu" => GermanLocalization,
                     "fra" => FrenchLocalization,
+                    "rus" => RussianLocalization,
                     "spa" => SpanishLocalization,
+                    "ukr" => UkrainianLocalization,
                     _ => EnglishLocalization,
                 },
-            Language.Ukrainian => UkrainianLocalization,
             Language.German => GermanLocalization,
             Language.French => FrenchLocalization,
+            Language.Russian => RussianLocalization,
             Language.Spanish => SpanishLocalization,
+            Language.Ukrainian => UkrainianLocalization,
             _ => EnglishLocalization,
         };
 

@@ -16,7 +16,7 @@ public partial class MainViewModel(
     DialogManager dialogManager,
     SnackbarManager snackbarManager,
     SettingsService settingsService,
-    UpdateService updateService,
+    //UpdateService updateService,
     LocalizationManager localizationManager
 ) : ViewModelBase
 {
@@ -24,26 +24,7 @@ public partial class MainViewModel(
 
     public DashboardViewModel Dashboard { get; } = viewModelManager.GetDashboardViewModel();
 
-    private async Task ShowUkraineSupportMessageAsync()
-    {
-        if (!settingsService.IsUkraineSupportMessageEnabled)
-            return;
-
-        var dialog = viewModelManager.GetMessageBoxViewModel(
-            localizationManager.UkraineSupportTitle,
-            localizationManager.UkraineSupportMessage,
-            localizationManager.LearnMoreButton,
-            localizationManager.CloseButton
-        );
-
-        // Disable this message in the future
-        settingsService.IsUkraineSupportMessageEnabled = false;
-        settingsService.Save();
-
-        if (await dialogManager.ShowDialogAsync(dialog) == true)
-            Process.StartShellExecute("https://tyrrrz.me/ukraine?source=discordchatexporter");
-    }
-
+    
     private async Task ShowDevelopmentBuildMessageAsync()
     {
         if (!Program.IsDevelopmentBuild)
@@ -68,7 +49,7 @@ public partial class MainViewModel(
     {
         try
         {
-            var updateVersion = await updateService.CheckForUpdatesAsync();
+            //var updateVersion = await updateService.CheckForUpdatesAsync();
             if (updateVersion is null)
                 return;
 
@@ -79,14 +60,14 @@ public partial class MainViewModel(
                     updateVersion
                 )
             );
-            await updateService.PrepareUpdateAsync(updateVersion);
+            //await updateService.PrepareUpdateAsync(updateVersion);
 
             snackbarManager.Notify(
                 localizationManager.UpdateReadyMessage,
                 localizationManager.UpdateInstallNowButton,
                 () =>
                 {
-                    updateService.FinalizeUpdate(true);
+                    //updateService.FinalizeUpdate(true);
 
                     if (Application.Current?.ApplicationLifetime?.TryShutdown(2) != true)
                         Environment.Exit(2);
@@ -102,7 +83,7 @@ public partial class MainViewModel(
 
     public override async Task InitializeAsync()
     {
-        await ShowUkraineSupportMessageAsync();
+        
         await ShowDevelopmentBuildMessageAsync();
         await CheckForUpdatesAsync();
     }
@@ -115,7 +96,7 @@ public partial class MainViewModel(
             settingsService.Save();
 
             // Finalize pending updates
-            updateService.FinalizeUpdate(false);
+            //updateService.FinalizeUpdate(false);
         }
 
         base.Dispose(disposing);

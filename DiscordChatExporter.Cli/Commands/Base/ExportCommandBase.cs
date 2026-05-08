@@ -137,13 +137,13 @@ public abstract class ExportCommandBase : DiscordCommandBase
     public bool IsUtcNormalizationEnabled { get; set; } = false;
 
     [CommandOption(
-        "fuck-russia",
-        EnvironmentVariable = "FUCK_RUSSIA",
-        Description = "Don't print the Support Ukraine message to the console.",
+        "1",
+        EnvironmentVariable = "DiscordChatExporter_CLI_1",
+        Description = "1",
         // Use a converter to accept '1' as 'true' to reuse the existing environment variable
         Converter = typeof(TruthyBooleanInputConverter)
     )]
-    public bool IsUkraineSupportMessageDisabled { get; set; } = false;
+    
 
     [field: AllowNull, MaybeNull]
     protected ChannelExporter Exporter => field ??= new ChannelExporter(Discord);
@@ -365,25 +365,7 @@ public abstract class ExportCommandBase : DiscordCommandBase
                 "┌────────────────────────────────────────────────────────────────────┐"
             );
             console.Output.WriteLine(
-                "│   Thank you for supporting Ukraine <3                              │"
-            );
-            console.Output.WriteLine(
-                "│                                                                    │"
-            );
-            console.Output.WriteLine(
-                "│   As Russia wages a genocidal war against my country,              │"
-            );
-            console.Output.WriteLine(
-                "│   I'm grateful to everyone who continues to                        │"
-            );
-            console.Output.WriteLine(
-                "│   stand with Ukraine in our fight for freedom.                     │"
-            );
-            console.Output.WriteLine(
-                "│                                                                    │"
-            );
-            console.Output.WriteLine(
-                "│   Learn more: https://tyrrrz.me/ukraine                            │"
+                "│                 Hi my name Daniel aka uggtiu...                    │"
             );
             console.Output.WriteLine(
                 "└────────────────────────────────────────────────────────────────────┘"
