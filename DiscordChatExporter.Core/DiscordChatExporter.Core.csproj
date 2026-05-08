@@ -10,6 +10,9 @@
     <PackageReference Include="RazorBlade" />
     <PackageReference Include="Superpower" />
     <PackageReference Include="WebMarkupMin.Core" />
-    <PackageReference Include="YoutubeExplode" />
+    <Reference Include="YoutubeExplode">
+      <HintPath>..\libs\YoutubeExplode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
 </Project>
