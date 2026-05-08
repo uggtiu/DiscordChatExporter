@@ -358,7 +358,7 @@ public abstract class ExportCommandBase : DiscordCommandBase
 
     public override async ValueTask ExecuteAsync(IConsole console)
     {
-        // Support Ukraine callout
+        // Support Ukraine callout -- disabled :)
         //if (!IsUkraineSupportMessageDisabled)
         {
             return;

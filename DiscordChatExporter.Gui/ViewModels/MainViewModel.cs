@@ -47,38 +47,7 @@ public partial class MainViewModel(
 
     private async Task CheckForUpdatesAsync()
     {
-        try
-        {
-            //var updateVersion = await updateService.CheckForUpdatesAsync();
-            if (updateVersion is null)
-                return;
-
-            snackbarManager.Notify(
-                string.Format(
-                    localizationManager.UpdateDownloadingMessage,
-                    Program.Name,
-                    updateVersion
-                )
-            );
-            //await updateService.PrepareUpdateAsync(updateVersion);
-
-            snackbarManager.Notify(
-                localizationManager.UpdateReadyMessage,
-                localizationManager.UpdateInstallNowButton,
-                () =>
-                {
-                    //updateService.FinalizeUpdate(true);
-
-                    if (Application.Current?.ApplicationLifetime?.TryShutdown(2) != true)
-                        Environment.Exit(2);
-                }
-            );
-        }
-        catch
-        {
-            // Failure to update shouldn't crash the application
-            snackbarManager.Notify(localizationManager.UpdateFailedMessage);
-        }
+        return;
     }
 
     public override async Task InitializeAsync()
