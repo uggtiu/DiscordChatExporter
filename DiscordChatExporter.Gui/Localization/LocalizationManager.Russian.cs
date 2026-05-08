@@ -4,7 +4,7 @@ namespace DiscordChatExporter.Gui.Localization;
 
 public partial class LocalizationManager
 {
-    private static readonly IReadOnlyDictionary<string, string> EnglishLocalization =
+    private static readonly IReadOnlyDictionary<string, string> RussianLocalization =
         new Dictionary<string, string>
         {
             // Dashboard
