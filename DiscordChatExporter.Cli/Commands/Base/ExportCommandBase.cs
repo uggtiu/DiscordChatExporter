@@ -137,9 +137,9 @@ public abstract class ExportCommandBase : DiscordCommandBase
     public bool IsUtcNormalizationEnabled { get; set; } = false;
 
     [CommandOption(
-        "1",
-        EnvironmentVariable = "DiscordChatExporter_CLI_1",
-        Description = "1",
+        "some",
+        EnvironmentVariable = "DiscordChatExporter_CLI_some",
+        Description = "some",
         // Use a converter to accept '1' as 'true' to reuse the existing environment variable
         Converter = typeof(TruthyBooleanInputConverter)
     )]
@@ -364,6 +364,5 @@ public abstract class ExportCommandBase : DiscordCommandBase
             return;
         }
 
-        await base.ExecuteAsync(console);
     }
 }
